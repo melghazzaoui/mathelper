@@ -104,7 +104,7 @@ void findLimit(FunctionEvaluator& functionEvaluator, LimitInfinitySide_e side = 
 }
 
 
-#include "ExpressionParser/TreeNode.h"
+#include "TreeNode.h"
 
 int main() {
     variableMap_t varmap;
