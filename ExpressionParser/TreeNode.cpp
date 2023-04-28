@@ -17,4 +17,5 @@ std::shared_ptr<TreeNode> TreeNode::buildExpressionTree(const std::string &expre
         std::cout << tokens[i] << std::endl;
 
     }
+    return std::shared_ptr<TreeNode>(NULL);
 }

@@ -8,16 +8,24 @@
 #include <string>
 #include <sstream>
 
+namespace utils {
+
 #define DECLARE_STR_TO_TYPE(TYPE, FCTNAME) TYPE FCTNAME(const std::string& s);
 
-DECLARE_STR_TO_TYPE(double, strToDoule)
-DECLARE_STR_TO_TYPE(long double, strToLongDoule)
-DECLARE_STR_TO_TYPE(int, strToInt)
-DECLARE_STR_TO_TYPE(unsigned int, strToUnsigned)
+    DECLARE_STR_TO_TYPE(double, strToDoule)
+
+    DECLARE_STR_TO_TYPE(long double, strToLongDoule)
+
+    DECLARE_STR_TO_TYPE(int, strToInt)
+
+    DECLARE_STR_TO_TYPE(unsigned int, strToUnsigned)
 
 
-bool isAlpha(char c);
-bool isNum(char c);
-bool isAlphaNum(char c);
+    bool isAlpha(char c);
+
+    bool isNum(char c);
+
+    bool isAlphaNum(char c);
+}
 
 #endif //TEST_UTILS_H
