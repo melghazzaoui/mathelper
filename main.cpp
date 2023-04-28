@@ -111,11 +111,9 @@ void findLimit(FunctionEvaluator& functionEvaluator, LimitInfinitySide_e side = 
 #define CRLF std::endl
 
 int main() {
-    variableMap_t varmap;
-    varmap.insert(make_pair("x",34.6));
     Operator::initOperatorList();
-    auto node = TreeNode::buildExpressionTree(".1 + log(exp(x))");
-    auto res = node->eval(varmap);
+    auto node = TreeNode::buildExpressionTree("log(exp(x+y))");
+    auto res = node->eval(45.3);
     std::cout << "RES = " << res << std::endl;
 
 }

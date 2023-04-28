@@ -31,6 +31,7 @@ public:
     TreeNode(std::shared_ptr<TreeNode> left, std::shared_ptr<TreeNode> right) : left(left), right(right) {};
     virtual ~TreeNode() { std::cout << "destroy" << std::endl; }
     virtual long double eval(const variableMap_t& varmap) const = 0;
+    virtual long double eval(long double x) const  = 0;
     static std::shared_ptr<TreeNode> buildExpressionTree(const std::string& expression);
 
     static std::shared_ptr<TreeNode> tokensToTreeNode(const std::vector<ParserToken> &tokens);
@@ -49,6 +50,10 @@ public:
     long double eval(const variableMap_t& varmap) const {
         return value;
     }
+
+    long double eval(long double x) const {
+        return value;
+    }
 };
 
 class VariableNode : public TreeNode {
@@ -63,6 +68,10 @@ public:
             return it->second;
         }
         return 0;
+    }
+
+    long double eval(long double x) const {
+        return x;
     }
 };
 
@@ -85,6 +94,17 @@ public:
         }
         return opr->perform(leftValue, rightValue);
     };
+
+    long double eval(long double x) const {
+        long double leftValue, rightValue;
+        if (left) {
+            leftValue = left->eval(x);
+        }
+        if (right) {
+            rightValue = right->eval(x);
+        }
+        return opr->perform(leftValue, rightValue);
+    }
 
     bool built() const {
         return left || right;
