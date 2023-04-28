@@ -9,8 +9,8 @@
 
 #define OPERATOR_PRIO_ADD   1
 #define OPERATOR_PRIO_SUB   2
-#define OPERATOR_PRIO_DIV   3
-#define OPERATOR_PRIO_MUL   4
+#define OPERATOR_PRIO_MUL   3
+#define OPERATOR_PRIO_DIV   4
 #define OPERATOR_PRIO_MINUS 5
 #define OPERATOR_PRIO_FCT   6
 #define OPERATOR_PRIO_POW   7
@@ -18,6 +18,7 @@
 #include <list>
 #include <memory>
 #include <cmath>
+#include <iostream>
 
 class Operator {
 private:

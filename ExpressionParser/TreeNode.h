@@ -29,7 +29,7 @@ protected:
 public:
     TreeNode() : left(std::shared_ptr<TreeNode>(NULL)), right(std::shared_ptr<TreeNode>(NULL)) {};
     TreeNode(std::shared_ptr<TreeNode> left, std::shared_ptr<TreeNode> right) : left(left), right(right) {};
-    virtual ~TreeNode() { std::cout << "destroy" << std::endl; }
+    virtual ~TreeNode() {};
     virtual long double eval(const variableMap_t& varmap) const = 0;
     virtual long double eval(long double x) const  = 0;
     static std::shared_ptr<TreeNode> buildExpressionTree(const std::string& expression);

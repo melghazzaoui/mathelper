@@ -6,7 +6,7 @@
 #include "Operator.h"
 #include "utils.h"
 
-std::string ParserToken::separators = "+-/*^([]{}=:,;%!<>@&";
+std::string ParserToken::separators = "+-/*^()[]{}=:,;%!<>@&";
 
 bool ParserToken::isSeparator(char c) {
     return separators.find(c) != separators.npos;

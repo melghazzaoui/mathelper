@@ -112,8 +112,8 @@ void findLimit(FunctionEvaluator& functionEvaluator, LimitInfinitySide_e side = 
 
 int main() {
     Operator::initOperatorList();
-    auto node = TreeNode::buildExpressionTree("log(exp(x+y))");
-    auto res = node->eval(45.3);
+    auto node = TreeNode::buildExpressionTree("1+2/exp(x)");
+    auto res = node->eval(344);
     std::cout << "RES = " << res << std::endl;
 
 }
