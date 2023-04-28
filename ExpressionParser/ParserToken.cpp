@@ -36,6 +36,7 @@ void ParserToken::getTokens(const std::string &expression, std::vector<ParserTok
     while (cstr[i]) {
         char c = cstr[i];
         if (isSeparator(c)) {
+            exprToken = utils::strTrim(exprToken);
             if (!exprToken.empty()) {
                 tokens.push_back(ParserToken(exprToken));
                 exprToken.clear();
@@ -53,8 +54,11 @@ void ParserToken::getTokens(const std::string &expression, std::vector<ParserTok
             size_t len = getClosingParenthesis(cstr, i);
             if (len != std::string::npos) {
                 exprToken = expression.substr(i+1, len);
-                tokens.push_back(ParserToken(exprToken, true));
-                exprToken.clear();
+                exprToken = utils::strTrim(exprToken);
+                if (!exprToken.empty()) {
+                    tokens.push_back(ParserToken(exprToken, true));
+                    exprToken.clear();
+                }
                 i++;
                 i += len;
                 i++;
@@ -64,5 +68,10 @@ void ParserToken::getTokens(const std::string &expression, std::vector<ParserTok
             }
         }
         ++i;
+    }
+    exprToken = utils::strTrim(exprToken);
+    if (!exprToken.empty()) {
+        tokens.push_back(ParserToken(exprToken));
+        exprToken.clear();
     }
 }

@@ -107,10 +107,15 @@ void findLimit(FunctionEvaluator& functionEvaluator, LimitInfinitySide_e side = 
 #include "TreeNode.h"
 #include "utils.h"
 
+#define COUT std::cout
+#define CRLF std::endl
+
 int main() {
     variableMap_t varmap;
-    varmap.insert(make_pair("x",10.5));
+    varmap.insert(make_pair("x",34.6));
     Operator::initOperatorList();
-    auto node = TreeNode::buildExpressionTree("-23.56+3.45*cos(2*x)/((4-x-4+x)*(3*6.2+1))");
+    auto node = TreeNode::buildExpressionTree(".1 + log(exp(x))");
+    auto res = node->eval(varmap);
+    std::cout << "RES = " << res << std::endl;
 
 }

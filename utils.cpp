@@ -33,4 +33,28 @@ return x; \
     bool isAlphaNum(char c) {
         return isAlpha(c) || isNum(c);
     }
+
+    bool isWhiteSpace(char c) {
+        return  c == ' ' ||
+                c == '\t' ||
+                c == '\r' ||
+                c == '\n';
+    }
+
+    std::string strTrim(const std::string& s) {
+        const char* cstr = s.c_str();
+        size_t offsetBegin = 0;
+        while(isWhiteSpace(cstr[offsetBegin])) {
+            offsetBegin++;
+        }
+        size_t offsetEnd = s.size();
+        while(isWhiteSpace(cstr[offsetEnd-1])) {
+            offsetEnd--;
+        }
+        if (offsetBegin > 0 || offsetEnd != s.size()) {
+            return s.substr(offsetBegin, offsetEnd-offsetBegin);
+        }
+
+        return s;
+    }
 }

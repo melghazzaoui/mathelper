@@ -8,6 +8,7 @@
 #include <string>
 #include <vector>
 #include <ostream>
+#include "utils.h"
 
 class ParserToken {
 private:
@@ -16,8 +17,9 @@ private:
     static std::string separators;
 public:
     ParserToken() : opaque(false) {};
-    ParserToken(const std::string& expression) : opaque(false), expression(expression) {};
-    ParserToken(const std::string& expression, bool opaque) : opaque(opaque), expression(expression) {};
+    ParserToken(const std::string& expression) : opaque(false), expression(utils::strTrim(expression)) {};
+    ParserToken(const std::string& expression, bool opaque) : opaque(opaque), expression(utils::strTrim(expression)) {};
+    std::string getExpression() const { return expression; };
     bool isOpaque() const { return opaque; };
     static bool isSeparator(char c);
     static void getTokens(const std::string& expression, std::vector<ParserToken>& tokens);
