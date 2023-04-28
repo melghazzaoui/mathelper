@@ -105,26 +105,12 @@ void findLimit(FunctionEvaluator& functionEvaluator, LimitInfinitySide_e side = 
 
 
 #include "TreeNode.h"
+#include "utils.h"
 
 int main() {
     variableMap_t varmap;
     varmap.insert(make_pair("x",10.5));
     Operator::initOperatorList();
-    auto node = TreeNode::buildExpressionTree("-2+((4-x-4+x)*(3*6.2+1))");
-    auto res = node->eval(varmap);
-    std::cout << res << std::endl;
-    LogEvaluator logEval;
-    findLimit(logEval, 0);
+    auto node = TreeNode::buildExpressionTree("-23.56+3.45*cos(2*x)/((4-x-4+x)*(3*6.2+1))");
 
-    ExpEvaluator expEval;
-    findLimit(expEval);
-    findLimit(expEval, LIMIT_INFINITY_NEGATIVE);
-
-    CosEvaluator cosEval;
-    findLimit(cosEval, PI);
-
-    Eval1 eval1;
-    findLimit(eval1, LIMIT_INFINITY_POSITIVE);
-
-    return 0;
 }

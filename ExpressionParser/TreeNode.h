@@ -16,17 +16,12 @@ typedef std::map<std::string, long double> variableMap_t;
 
 class TreeNode {
 private:
-    static bool isAlpha(char c);
-    static bool isNum(char c);
-    static bool isAlphaNum(char c);
     static std::shared_ptr<TreeNode> makeSharedTreeNode(TreeNode* node) {
         return std::shared_ptr<TreeNode>(node);
     }
 protected:
     std::shared_ptr<TreeNode> left;
     std::shared_ptr<TreeNode> right;
-    static TreeNode* createNodeFromAlphanum(const std::string& alphanum);
-    static std::shared_ptr<TreeNode> createTreeFromChildren(const std::list<std::shared_ptr<TreeNode>>& children);
 public:
     TreeNode() : left(std::shared_ptr<TreeNode>(NULL)), right(std::shared_ptr<TreeNode>(NULL)) {};
     TreeNode(std::shared_ptr<TreeNode> left, std::shared_ptr<TreeNode> right) : left(left), right(right) {};
