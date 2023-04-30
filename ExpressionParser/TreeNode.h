@@ -31,7 +31,7 @@ public:
     TreeNode(std::shared_ptr<TreeNode> left, std::shared_ptr<TreeNode> right) : left(left), right(right) {};
     virtual ~TreeNode() {};
     virtual long double eval(const variableMap_t& varmap) const = 0;
-    virtual long double eval(long double x) const  = 0;
+    virtual long double eval(long double x = 0) const  = 0;
     static std::shared_ptr<TreeNode> buildExpressionTree(const std::string& expression);
 
     static std::shared_ptr<TreeNode> tokensToTreeNode(const std::vector<ParserToken> &tokens);

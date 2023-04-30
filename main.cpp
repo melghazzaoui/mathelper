@@ -16,13 +16,12 @@ const long double PI = 3.14159265358979323846264338327950288419716939937510;
 using namespace std;
 
 
-long double U(long double x) {
-    long double _1 = 1;
-    return _1/log(x);
-}
+#include "TreeNode.h"
+#include "utils.h"
+#include <assert.h>
 
-
-
+#define COUT std::cout
+#define CRLF std::endl
 
 class Eval1 : public FunctionEvaluator {
 public:
@@ -104,16 +103,123 @@ void findLimit(FunctionEvaluator& functionEvaluator, LimitInfinitySide_e side = 
 }
 
 
-#include "TreeNode.h"
-#include "utils.h"
 
-#define COUT std::cout
-#define CRLF std::endl
+void test1() {
+    COUT << "Running test " << __FUNCTION__ << CRLF;
+    auto node = TreeNode::buildExpressionTree("1+2");
+    auto res = node->eval(0);
+    assert(res == 3);
+}
+
+void test2() {
+    COUT << "Running test " << __FUNCTION__ << CRLF;
+    auto node = TreeNode::buildExpressionTree("1-(2+3.5)");
+    auto res = node->eval(0);
+    assert(res == -4.5);
+}
+
+void test3() {
+    COUT << "Running test " << __FUNCTION__ << CRLF;
+    auto node = TreeNode::buildExpressionTree("(5+1-2-5)");
+    auto res = node->eval(0);
+    assert(res == -1);
+}
+
+void test4() {
+    COUT << "Running test " << __FUNCTION__ << CRLF;
+    auto node = TreeNode::buildExpressionTree("1+2/3*3");
+    auto res = node->eval(0);
+    assert(res == 3);
+}
+
+void test5() {
+    COUT << "Running test " << __FUNCTION__ << CRLF;
+    auto node = TreeNode::buildExpressionTree("1+2/3*log(exp(3))");
+    auto res = node->eval(0);
+    assert(res == 3);
+}
+
+void test6() {
+    COUT << "Running test " << __FUNCTION__ << CRLF;
+    auto node = TreeNode::buildExpressionTree("6^3/6^2");
+    auto res = node->eval(0);
+    assert(res == 6);
+}
+
+void test7() {
+    COUT << "Running test " << __FUNCTION__ << CRLF;
+    auto node = TreeNode::buildExpressionTree("-5");
+    auto res = node->eval(0);
+    assert(res == -5);
+}
+
+void testLog() {
+    COUT << "Running test " << __FUNCTION__ << CRLF;
+    auto node = TreeNode::buildExpressionTree("log(x)");
+    assert(node->eval(1) == 0);
+    assert(node->eval(2) == std::log((long double)2));
+}
+
+void testExp() {
+    COUT << "Running test " << __FUNCTION__ << CRLF;
+    auto node = TreeNode::buildExpressionTree("exp(x)");
+    assert(node->eval(0) == 1.0L);
+    assert(node->eval(2) == std::exp((long double)2));
+}
+
+void testNestedFunctions() {
+    COUT << "Running test " << __FUNCTION__ << CRLF;
+    auto node = TreeNode::buildExpressionTree("exp(log(x))");
+    assert(node->eval(0) == 0.0L);
+    assert(node->eval(2) == 2.0L);
+}
+
+void testNestedFunctions1() {
+    COUT << "Running test " << __FUNCTION__ << CRLF;
+    auto node = TreeNode::buildExpressionTree("log(exp(x))");
+    assert(node->eval(0) == 0.0L);
+    assert(node->eval(2) == 2.0L);
+}
+
+void testCos() {
+    COUT << "Running test " << __FUNCTION__ << CRLF;
+    auto node = TreeNode::buildExpressionTree("cos(n*3.14159265358979323846264338327950288419716939937510)");
+    assert(node->eval(0) == 1.0L);
+    assert(node->eval(1) == -1.0L);
+}
+
+void testSin() {
+    COUT << "Running test " << __FUNCTION__ << CRLF;
+    auto node = TreeNode::buildExpressionTree("sin(n*3.14159265358979323846264338327950288419716939937510)");
+    assert(node->eval(0) == 0.0L);
+    assert(node->eval(0.5) == 1.0L);
+}
+
+void testComplexExpression() {
+    COUT << "Running test " << __FUNCTION__ << CRLF;
+    auto node = TreeNode::buildExpressionTree("1.5 + 3/2 + (13 - 2 - 3 + 1 + 5/5 )");
+    assert(node->eval() == 13.0L);
+}
+
+void run_TNR() {
+    test1();
+    test2();
+    test3();
+    test4();
+    test5();
+    test6();
+    test7();
+    testLog();
+    testExp();
+    testNestedFunctions();
+    testNestedFunctions1();
+    testCos();
+    testSin();
+    testComplexExpression();
+    COUT << CRLF << "------ NON-REG TESTS ARE OK ------" << CRLF;
+}
 
 int main() {
     Operator::initOperatorList();
-    auto node = TreeNode::buildExpressionTree("1+2/exp(x)");
-    auto res = node->eval(344);
-    std::cout << "RES = " << res << std::endl;
-
+    run_TNR();
 }

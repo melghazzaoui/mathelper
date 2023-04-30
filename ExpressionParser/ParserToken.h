@@ -15,6 +15,7 @@ private:
     bool opaque;
     std::string expression;
     static std::string separators;
+    static std::string openingParenthesis;
 public:
     ParserToken() : opaque(false) {};
     ParserToken(const std::string& expression) : opaque(false), expression(utils::strTrim(expression)) {};
@@ -22,6 +23,7 @@ public:
     std::string getExpression() const { return expression; };
     bool isOpaque() const { return opaque; };
     static bool isSeparator(char c);
+    static bool isOpeningParenthesis(char c);
     static void getTokens(const std::string& expression, std::vector<ParserToken>& tokens);
     friend std::ostream& operator<<(std::ostream& os, const ParserToken& token) {
         return os << token.expression;
